@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h2 class="display-4 text-uppercase text-center mb-5">The Best Recipes</h2>
+        <div class="row">
+            {% for i in data %}
+            <div class="col-lg-4 col-md-6 mb-2">
+                <a href="/add_comment/{{i.id}}">
+                <div class="rent-item mb-4">
+                    <img class="img-fluid mb-4" src="{{i.photo.url}}" alt="">
+                    <h4 class="text-uppercase mb-4">{{i.title}}</h4>
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="px-2">
+                            <i class="fa fa-clock text-primary mr-1"></i>
+                            <span>{{i.creationdate}}</span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

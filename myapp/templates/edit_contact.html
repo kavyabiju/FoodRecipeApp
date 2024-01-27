@@ -1,0 +1,104 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -37px;
+  position: relative;
+  background:gray;
+  color:yellow;
+  z-index: 2;
+  padding:10px;
+}
+
+.field-icon:hover {
+  cursor:pointer;
+}
+</style>
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-success">
+        <div class="box-header">
+          <h2 class="box-title">Enquiry Details</h2>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input type="text" class="form-control" name="name" value="{{contact.name}}" id="exampleInputEmail1" placeholder="Enter Name" readonly required="required">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="password" class="form-control" name="email" value="{{contact.email}}" id="email" placeholder="Enter Email" readonly>
+              <span class="fa fa-eye field-icon toggle-password-2"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail3">Subject</label>
+              <input type="text" class="form-control" name="subject" value="{{contact.subject}}" placeholder="Enter Subject" readonly id="exampleInputEmail3">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail3">Enq. Posting Date</label>
+              <input type="text" class="form-control" name="creationdate" value="{{contact.creationdate}}" placeholder="Enter Posting Date" readonly id="exampleInputEmail3">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail3">Message</label>
+              <input type="text" class="form-control" name="message" value="{{contact.message}}" placeholder="Enter text" readonly id="exampleInputEmail3">
+            </div>
+            {% if contact.status == "unread" %}
+            <div class="form-group">
+              <label for="exampleInputEmail3">Remark</label>
+              <textarea type="text" class="form-control" name="remark" placeholder="Enter Remark" id="exampleInputEmail3"></textarea>
+            </div>
+            {% endif %}
+            {% if contact.status == "read" %}
+            <div class="form-group">
+              <label for="exampleInputEmail3">Remark</label>
+              <textarea type="text" class="form-control" name="remark" placeholder="Enter Remark" id="exampleInputEmail3" readonly>{{contact.remark}}</textarea>
+            </div>
+            {% endif %}
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<script>
+$(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#mobile").attr("type") == "password") {
+    $("#mobile").attr("type", "text");
+  } else {
+    $("#mobile").attr("type", "password");
+  }
+});
+
+$(".toggle-password-2").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#email").attr("type") == "password") {
+    $("#email").attr("type", "email");
+  }
+  else {
+    $("#email").attr("type", "password");
+  }
+});
+</script>
+
+
+{% endblock %}
+

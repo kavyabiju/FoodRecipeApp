@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+{% load static custom_tags %}
+{% block body %}
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="py-5 px-2 text-center" style="margin-top: -120px;">
+            <img class="py-5">
+            <h2 class="text-uppercase text-primary mb-4">Recipe</h2>
+            </img>
+        </div>
+        <img class="img-fluid mb-4" src="{{data.photo.url}}" style="width: 1500px; height: 600px;" alt="">
+        <div class="row">
+            <div class="col-md-6">
+                <h6>{{data.creationdate}}</h6>
+                <h3>{{data.title}}</h3>
+                <h4 style="color:red">Uploaded by {{data.register.user.first_name}}</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-success">For Beginners</button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1" style="margin-top: -17px; margin-right: -8px;"><br>
+                    <hr class="bg-success" style="color: green; width: 2px; height: 80px;">
+                </div>
+                <div class="col-md-8"><br>
+                    <h6>Prep:&nbsp;{{data.pertime}}&nbsp;mins</h6>
+                    <h6>Cook:&nbsp;{{data.cooktime}}&nbsp;mins</h6>
+                    <h6>Yields:&nbsp;{{data.yields}}&nbsp;Servings</h6>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7" style="margin-top: -17px; margin-right: -8px;"><br>
+                    {{data.description}} <br>
+                </div>
+                <div class="col-md-5">
+                    <h3>Ingredients</h3><br>
+                    {% for ingredient_line in data.ingredients|split_lines %}
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredient_line"
+                                   value="{{ ingredient_line }}" required>
+                            <label class="form-check-label">
+                                {{ ingredient_line }}
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-2">
+                <br><br>
+                <div class="contact-form bg-light mb-4" style="padding: 30px;">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <input type="text" class="form-control p-4" name="name" placeholder="Your Name"
+                                       required>
+                            </div>
+                            <div class="col-6 form-group">
+                                <input type="email" class="form-control p-4" name="email" placeholder="Your Email"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control py-3 px-4" rows="5" name="message" placeholder="Message"
+                                      required></textarea>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-3 px-5" type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

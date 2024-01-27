@@ -1,0 +1,85 @@
+{% extends 'user_index.html' %}
+{% load static %}
+{% block body %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -37px;
+  position: relative;
+  background:green;
+  color:yellow;
+  z-index: 2;
+  padding:10px;
+}
+
+.field-icon:hover {
+  cursor:pointer;
+}
+</style>
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-success">
+        <div class="box-header">
+          <h2 class="box-title">My Profile</h2>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Full Name</label>
+              <input type="text" class="form-control"  name="firstname"  placeholder="Firstname" required="required" value="{{data.user.first_name}}" id="exampleInputEmail1">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="password" class="form-control" name="email" placeholder="Email" required="required" value="{{data.user.email}}" id="email" readonly>
+              <span class="fa fa-eye field-icon toggle-password-2"></span>
+            </div>
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="password" class="form-control" name="contact" id="mobile" placeholder="Contact Number" required="required" value="{{data.contact}}">
+              <span class="fa fa-eye field-icon toggle-password"></span>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail4">Registration Date</label>
+              <input type="text" class="form-control" name="creationdate" required="required" readonly value="{{data.creationdate}}" id="exampleInputEmail4" placeholder="Enter Yield (E.g: 8 Servings)">
+            </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<script>
+$(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#mobile").attr("type") == "password") {
+    $("#mobile").attr("type", "text");
+  } else {
+    $("#mobile").attr("type", "password");
+  }
+});
+
+$(".toggle-password-2").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  if ($("#email").attr("type") == "password") {
+    $("#email").attr("type", "email");
+  }
+  else {
+    $("#email").attr("type", "password");
+  }
+});
+</script>
+
+{% endblock %}
+

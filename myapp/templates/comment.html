@@ -1,0 +1,97 @@
+{% extends 'user_index.html' %}
+{% load static %}
+{% block body %}
+
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-success">
+        <div class="box-header text-center">
+          <h3 class="">List Your Recipe Details</h3>
+        </div><!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" >
+
+          <div class="box-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Recipe Title</label>
+              <input type="text" class="form-control" name="title" id="exampleInputEmail1" value="{{recipe.recipe.title}}" placeholder="Enter Recipe Title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Recipe Prepration Time (In minutes)</label>
+              <input type="text" class="form-control" name="pertime" id="exampleInputEmail1" value="{{recipe.recipe.pertime}}" placeholder="Enter Recipe Prepration Time">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Recipe Cook Time (In minutes)</label>
+              <input type="text" class="form-control" name="cooktime" id="exampleInputEmail1" value="{{recipe.recipe.cooktime}}" placeholder="Enter Recipe Cook Time">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Yield (E.g: 8 Servings)</label>
+              <input type="text" class="form-control" name="yields" id="exampleInputEmail1" value="{{recipe.recipe.yields}}" placeholder="Enter Yield (E.g: 8 Servings)">
+            </div>
+            <div class="form-group" id="ingredientContainer">
+              <label for="exampleInputEmail1">Recipe Ingredients</label>
+              <div class="row form-group">
+                <div class="col-md-11 pr-0">
+                  <input type="text" class="form-control" name="ingredients[]" value="{{recipe.recipe.ingredients}}" placeholder="Enter Recipe Ingredients">
+                </div>
+                <div class="col-md-1 pr-2 pl-0" style="padding-right:10px">
+                  <button class="btn btn-success" type="button" id="addIngredient">
+                    <i class="fa fa-plus"></i> Add New
+                  </button>
+                </div>
+              </div>
+            </div>
+
+<!--            <div class="form-group" id="ingredientContainer">-->
+<!--              <label for="exampleInputEmail1">Recipe Ingredients</label>-->
+<!--              <input type="text" class="form-control" name="ingredients[]" placeholder="Enter Recipe Ingredients">-->
+<!--              <button style="position: absolute; margin-left: 1088px; margin-top: -58px;" class="btn btn-success" type="button" id="addIngredient">-->
+<!--                <i class="fa fa-plus"></i>-->
+<!--              </button>-->
+<!--            </div>-->
+            <div class="form-group">
+              <label for="exampleInputPassword1">Description</label>
+              <textarea type="text" rows="5" class="form-control" name="description" id="exampleInputPassword1" placeholder="Enter Description">{{recipe.recipe.description}}</textarea>
+            </div>
+            <img src="{{recipe.recipe.photo.url}}" style="width:150px"><br>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Photo</label>
+              <input type="file" class="form-control" name="photo" id="exampleInputPassword1">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // JavaScript code to add a new input field on button click
+  document.getElementById('addIngredient').addEventListener('click', function() {
+    var container = document.getElementById('ingredientContainer');
+    var newInput = document.createElement('div');
+    newInput.innerHTML = `
+    <div class="form-group">
+              <div class="row form-group">
+                <div class="col-md-11 pr-0">
+                  <input type="text" class="form-control" name="ingredients[]" placeholder="Enter Recipe Ingredients">
+                </div>
+                <div class="col-md-1 pr-2 pl-0" style="padding-right:10px">
+                  <button class="btn btn-danger removeIngredient" type="button">
+                    <i class="fa fa-times"></i> Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+    `;
+    container.appendChild(newInput);
+
+    // Add a click event listener to the remove button
+    var removeButton = newInput.querySelector('.removeIngredient');
+    removeButton.addEventListener('click', function() {
+      container.removeChild(newInput);
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block body %}
+
+
+<section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-header">
+            <h2 class="box-title">Manage Recipe Details</h2>
+          </div>
+          <div class="box-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th>S.No</th>
+                  <th>Recipe Title</th>
+                  <th>Recipe Prep. Time</th>
+                  <th>Recipe Cook Time</th>
+                  <th>Recipe Yield</th>
+                  <th>Creation Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.pertime }}</td>
+                    <td>{{ i.cooktime }}</td>
+                    <td>{{ i.yields }}</td>
+                    <td>{{ i.creationdate }}</td>
+                    <td>
+                      <a href="{% url 'admin_edit_recipe' i.id %}">Edit</a> | <a href="{% url 'admin_delete_recipe' i.id %}"  onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+      </div>
+          </div>
+        </div><!-- /.box -->
+      </div>
+    </div>
+  </section>
+  
+  
+
+{% endblock %}

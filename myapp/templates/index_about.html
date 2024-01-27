@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            {% for i in data %}
+            <h1 class="display-4 text-uppercase text-center mb-5">{{i.pagetitle}}</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <p>{{i.description}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<!-- Vendor Start -->
+    <div class="container-fluid py-5" style="margin-top:-20px; margin-bottom:40px">
+        <h3 class="text-center" style="color:#f77d0a">Gallery</h3>
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-1.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-2.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-3.jpeg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-4.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-5.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-6.jpeg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-7.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+                <div class="bg-light p-1">
+                    <img src="{% static 'img/vendor-8.jpg' %}" style="height:150px;width:100%" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+{% endblock %}
